@@ -16,22 +16,23 @@ use Illuminate\Support\Facades\Route;
 // -------------------------
 // imge show
 // -------------------------
-Route::get('/project_features/{filename}', function ($filename) {
-    $path = storage_path('app/public/project_features/'.$filename);
+Route::get('/project-features/files/{path}', function ($path) {
+    $fullPath = storage_path('app/public/'.$path);
 
-    if (! file_exists($path)) {
-        abort(404, 'Image not found');
+    if (! file_exists($fullPath)) {
+        abort(404);
     }
 
-    return response()->file($path);
-})->where('filename', '.*'); // <-- غير 'path' لـ 'filename'
+    return response()->file($fullPath);
+})->where('path', '.*');
+// <-- غير 'path' لـ 'filename'
 
 // Route to serve project sub-images
 Route::get('/project-images/files/{path}', function ($path) {
     $fullPath = storage_path('app/public/'.$path);
 
     if (! file_exists($fullPath)) {
-        abort(404, 'Image not found.');
+        abort(404);
     }
 
     return response()->file($fullPath);
@@ -39,14 +40,14 @@ Route::get('/project-images/files/{path}', function ($path) {
 
 // Route to serve project main images
 Route::get('/projects/{filename}', function ($filename) {
-    $path = storage_path('app/public/projects/'.$filename);
+    $path = storage_path('app/public/'.$filename);
 
     if (! file_exists($path)) {
-        abort(404, 'Image not found.');
+        abort(404);
     }
 
     return response()->file($path);
-});
+})->where('filename', '.*');
 
 // -------------------------
 // Public Auth

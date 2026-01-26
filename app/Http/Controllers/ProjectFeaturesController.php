@@ -65,8 +65,7 @@ class ProjectFeaturesController extends Controller
             'image' => 'nullable|image',
         ]);
 
-        if ($request->hasFile('image')) 
-            // حذف الصورة القديمة
+        if ($request->hasFile('image')) {
             if ($projectFeature->image && Storage::disk('public')->exists($projectFeature->image)) {
                 Storage::disk('public')->delete($projectFeature->image);
             }
