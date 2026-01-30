@@ -1,5 +1,1 @@
-{
-    "deploy": {
-        "startCommand": "php artisan storage:link || true && php-fpm -y /assets/php-fpm.conf & nginx -c /nginx.conf"
-    }
-}
+
